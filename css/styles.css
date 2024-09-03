@@ -1,0 +1,37 @@
+
+body {
+    background-color: green;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+#game-board {
+    display: grid;
+    grid-template-columns: repeat(13, 40px);
+    grid-template-rows: repeat(9, 40px);
+}
+
+.cell {
+    width: 40px;
+    height: 40px;
+    border: 1px solid black;
+}
+
+.wall {
+    background-color: gray;
+}
+
+.player {
+    background-color: blue;
+}
+
+.bomb {
+    background-color: red;
+}
+
+.player, .bomb {
+    z-index: 1;  /* Garantir que jogadores e bombas fiquem sobre as células */
+}

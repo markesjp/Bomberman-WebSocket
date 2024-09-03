@@ -1,0 +1,14 @@
+{
+  "name": "bomberman_game_final",
+  "version": "1.0.0",
+  "description": "Bomberman Game with WebSocket support",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node server/server.js"
+  },
+  "dependencies": {
+    "ws": "^8.18.0"
+  },
+  "author": "",
+  "license": "ISC"
+}
