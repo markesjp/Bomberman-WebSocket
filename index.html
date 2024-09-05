@@ -1,14 +1,22 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bomberman</title>
+    <title>Bomberman Game</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <div id="game-board"></div>
+    <div id="game-container">
+        <!-- Tabuleiro do jogo -->
+        <div id="game-board"></div>
+        
+        <!-- Exibição de status -->
+        <div id="status-display" class="status-display">Waiting for connection...</div>
+        <div id="win-screen"></div>
+    </div>
+
+    <!-- JavaScript para lógica do jogo -->
     <script src="js/game.js"></script>
 </body>
 </html>

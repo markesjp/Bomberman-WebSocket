@@ -1,4 +1,4 @@
-
+/* Estilos gerais */
 body {
     background-color: green;
     display: flex;
@@ -6,32 +6,144 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
+    font-family: Arial, sans-serif;
 }
 
+#game-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Estilo do tabuleiro do jogo */
 #game-board {
     display: grid;
-    grid-template-columns: repeat(13, 40px);
-    grid-template-rows: repeat(9, 40px);
+    grid-template-columns: repeat(19, 40px); /* Exemplo de 19 colunas */
+    grid-template-rows: repeat(15, 40px);    /* Exemplo de 15 linhas */
+    background-color: lightgreen;
+    gap: 2px;
+    position: relative;  /* Isso é importante! */
+    width: 760px;        /* 19 colunas * 40px */
+    height: 600px;       /* 15 linhas * 40px */
 }
 
-.cell {
+/* Estilos para paredes */
+.wall {
     width: 40px;
     height: 40px;
-    border: 1px solid black;
-}
-
-.wall {
     background-color: gray;
+    position: absolute;
+    z-index: 0; /* Z-index menor que o dos jogadores e bombas */
 }
 
+/* Exibição de status */
+.status-display {
+    position: fixed;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* Estilos para jogadores e bombas */
 .player {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    box-shadow: 0 0 8px;
+    position: absolute;
+    z-index: 3; /* Z-index maior que o das paredes e bombas */
+}
+
+.player1 {
     background-color: blue;
+    box-shadow: 0 0 8px rgba(0, 0, 255, 0.8);
 }
 
-.bomb {
+.player2 {
     background-color: red;
+    box-shadow: 0 0 8px rgba(255, 0, 0, 0.8);
 }
 
-.player, .bomb {
-    z-index: 1;  /* Garantir que jogadores e bombas fiquem sobre as células */
+.bomb-player1 {
+    width: 30px;
+    height: 30px;
+    background-color: orange;  /* Bombas do Player 1 laranja */
+    border-radius: 50%;
+    box-shadow: 0 0 8px rgba(255, 165, 0, 0.8);
+    animation: pulse 1s infinite;
+    position: absolute;
+    z-index: 2; /* Z-index menor que o dos jogadores, maior que o das paredes */
+}
+
+.bomb-player2 {
+    width: 30px;
+    height: 30px;
+    background-color: green;  /* Bombas do Player 2 verde */
+    border-radius: 50%;
+    box-shadow: 0 0 8px rgba(0, 255, 0, 0.8);
+    animation: pulse 1s infinite;
+    position: absolute;
+    z-index: 2; /* Z-index menor que o dos jogadores, maior que o das paredes */
+}
+
+.explosion {
+    background-color: orange;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    animation: explode 0.5s forwards, pulse 1s infinite;
+    z-index: 2; /* Z-index menor que o dos jogadores, maior que o das paredes */
+}
+
+.explosion::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    border-radius: 50%;
+    border: 2px solid yellow;
+    opacity: 0.5;
+    animation: ray 1s infinite;
+}
+
+#win-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    text-align: center;
+    display: none; /* Inicialmente escondido */
+}
+
+/* Animações */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+@keyframes explode {
+    from { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    to { transform: translate(-50%, -50%) scale(2); opacity: 0; }
+}
+
+@keyframes ray {
+    0% { transform: scale(0); opacity: 1; }
+    100% { transform: scale(1); opacity: 0; }
 }
